@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        function validateLogin(event) {
+            event.preventDefault();
+            var username = document.getElementById("username").value.trim();
+            var password = document.getElementById("password").value.trim();
+
+            if (!username || !password) {
+                alert("Vui lòng nhập đầy đủ tên đăng nhập và mật khẩu!");
+                return;
+            }
+            window.location.href = "TrangHome.html";
+        }
+    </script>
+    <style>
+        body {
+            background: url("background.png") no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+
+        .login-box {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            width: 350px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        .btn-login {
+            background-color: #c72918;
+            color: black;
+            border: none;
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="d-flex justify-content-center align-items-center vh-100">
+    <div class="login-box">
+        <h2 class="text-center">Đăng nhập</h2>
+        <form onsubmit="validateLogin(event)">
+            <div class="mb-3">
+                <label for="username" class="form-label">Tên đăng nhập</label>
+                <input type="text" class="form-control" id="username" placeholder="Nhập tên đăng nhập">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Mật khẩu</label>
+                <input type="password" class="form-control" id="password" placeholder="Nhập mật khẩu">
+            </div>
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="remember">
+                <label class="form-check-label" for="remember">Ghi nhớ đăng nhập</label>
+            </div>
+            <button type="submit" class="btn btn-login">Đăng Nhập</button>
+            <div class="text-center mt-3">
+                <a href="Trangquenmatkhau.html">Quên mật khẩu?</a> | <a href="taotaikhoan.html">Tạo tài khoản</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

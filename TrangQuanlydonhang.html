@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý đơn hàng</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        body {
+            display: flex;
+        }
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background: #343a40;
+            color: white;
+            padding: 20px;
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+        }
+        .sidebar a:hover {
+            background: #495057;
+        }
+        .content {
+            flex-grow: 1;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h4>Admin</h4>
+        <a href="Trangquanlysanpham.html">Quản lý sản phẩm</a>
+        <a href="TrangQuanlydonhang.html">Quản lý đơn hàng</a>
+        <a href="TrangQuanlynguodung.html">Quản lý người dùng</a>
+        <a href="TrangDoanhthu.html">Thống kê doanh thu</a>
+        <button type="button" class="btn btn-outline-secondary">
+            <a href="TrangHome.html" style="color: inherit; text-decoration: none;">Về Trang Chủ</a>
+        </button>
+    </div>
+    <div class="content">
+        <h2 class="mb-4">Quản lý đơn hàng</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Khách hàng</th>
+                    <th>Ngày đặt</th>
+                    <th>Trạng thái</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody id="orderTableBody">
+                <!-- Dữ liệu sẽ được thêm bằng jQuery -->
+            </tbody>
+        </table>
+    </div>
+    
+    <script>
+        $(document).ready(function () {
+            let orders = [
+                { id: 101, customer: "Nguyễn Văn A", date: "2024-03-20", status: "Chờ xử lý" },
+                { id: 102, customer: "Trần Thị B", date: "2024-03-18", status: "Đã giao" },
+                { id: 103, customer: "Lê Văn C", date: "2024-03-15", status: "Đang vận chuyển" }
+            ];
+            
+            function renderTable() {
+                $("#orderTableBody").empty();
+                orders.forEach((order, index) => {
+                    $("#orderTableBody").append(
+                        `<tr>
+                            <td>${order.id}</td>
+                            <td>${order.customer}</td>
+                            <td>${order.date}</td>
+                            <td>${order.status}</td>
+                            <td>
+                                <button class='btn btn-warning btn-sm update-btn' data-index='${index}'>Cập nhật</button>
+                                <button class='btn btn-danger btn-sm delete-btn' data-index='${index}'>Hủy</button>
+                            </td>
+                        </tr>`
+                    );
+                });
+            }
+            
+            renderTable();
+            
+            $(document).on("click", ".update-btn", function () {
+                const index = $(this).data("index");
+                const newStatus = prompt("Nhập trạng thái mới:", orders[index].status);
+                if (newStatus) {
+                    orders[index].status = newStatus;
+                    renderTable();
+                }
+            });
+            
+            $(document).on("click", ".delete-btn", function () {
+                const index = $(this).data("index");
+                if (confirm("Bạn có chắc chắn muốn hủy đơn hàng này?")) {
+                    orders.splice(index, 1);
+                    renderTable();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
